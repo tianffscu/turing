@@ -1,0 +1,24 @@
+logging:
+  path: ~/log
+  file: weblog
+  level: info
+server:
+  port: 8080
+  session:
+    timeout: 3600
+spring:
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/user?useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: root
+      password: Begged1234
+
+  jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+
