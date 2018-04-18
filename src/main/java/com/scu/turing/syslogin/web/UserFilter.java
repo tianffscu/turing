@@ -4,6 +4,7 @@ import com.scu.turing.syslogin.model.Role;
 import com.scu.turing.syslogin.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Component
 public class UserFilter extends OncePerRequestFilter {
 
     public static final String SESSION_USER_KEY = "auser";
@@ -42,13 +44,13 @@ public class UserFilter extends OncePerRequestFilter {
 //            response.setContentType("text/html; charset=utf-8");
             if (user == null) {
 //                response.setHeader("","");
-                response.sendRedirect("/login");
+                response.sendRedirect("/user/login");
             } else {
                 //权限验证
                 if (uri.contains("admin")) {//页面需要权限？
                     if (!user.getRole().equals(Role.getAdmin())) {//登录用户不是管理员?
                         LOGGER.warn("Non admin user request a admin page: " + user + uri);
-                        response.sendRedirect("/nopermission");
+                        response.sendRedirect("/401");
                     } else {
                         filterChain.doFilter(request, response);
                     }

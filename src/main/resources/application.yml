@@ -3,13 +3,15 @@ logging:
   file: weblog
   level: info
 server:
-  port: 8080
+  port: 8000
   session:
     timeout: 3600
 spring:
   thymeleaf:
     cache: false
     mode: LEGACYHTML5
+    encoding: utf-8
+    content-type: text/html
 
   datasource:
       driver-class-name: com.mysql.jdbc.Driver

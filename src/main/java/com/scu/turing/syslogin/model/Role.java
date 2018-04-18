@@ -13,6 +13,9 @@ public class Role {
     private int id;
     private String name;
 
+    private static final Role SYS_ADMIN = new Role(0, "SysAdmin");
+    private static final Role SYS_USER = new Role(1, "SysUser");
+
     public Role() {
     }
 
@@ -38,11 +41,11 @@ public class Role {
     }
 
     public static Role getAdmin() {
-        return new Role(0, "Admin");
+        return SYS_ADMIN;
     }
 
     public static Role getSysUser() {
-        return new Role(1, "SysUser");
+        return SYS_USER;
     }
 
     @Override
