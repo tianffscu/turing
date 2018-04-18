@@ -3,7 +3,7 @@ logging:
   file: weblog
   level: info
 server:
-  port: 8000
+  port: 8080
   session:
     timeout: 3600
 spring:
@@ -23,4 +23,6 @@ spring:
       hibernate:
         ddl-auto: update
       show-sql: true
+base:
+  path: http://127.0.0.1:8080/
 
