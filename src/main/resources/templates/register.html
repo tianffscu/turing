@@ -5,7 +5,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
    <meta name="description" content="Bootstrap Admin App + jQuery"/>
    <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin"/>
-   <title>云收藏 | 让收藏更简单</title>
+   <title>图灵 | 任务分发平台</title>
    <link rel="icon" href="/img/icon.ico" type="image/x-icon" />
    <link rel="stylesheet" th:href="@{/vendor/fontawesome/css/font-awesome.min.css}"></link>
 　　<link rel="stylesheet" th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}"></link>
@@ -53,7 +53,7 @@
             <span>-</span>
             <span>2017</span>
             <br/>
-            <span>cloudfavorites@126.com</span>
+            <span>email.me@google.com</span>
          </div>
       </div>
    </div>
@@ -81,7 +81,7 @@
             				 passWord: this.password,
             				 userName: this.userName
 	            			 };
-            	    this.$http.post('/user/regist',datas).then(function(response){
+            	    this.$http.post('/user/register',datas).then(function(response){
             	    	 if(response.data.rspCode == '000000'){
             	    		  window.open('/', '_self');
             	    	 }else{

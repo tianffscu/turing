@@ -30,7 +30,7 @@ public class UserController extends BaseController {
                 return result(ExceptionMsg.EmailUsed);
             }
 
-            user.setPwd(getPwd(user.getPwd()));
+            user.setPassword(getPwd(user.getPassword()));
 //            user.setCreateTime(DateUtils.getCurrentTime());
 //            user.setLastModifyTime(DateUtils.getCurrentTime());
 //            user.setProfilePicture("img/favicon.png");
@@ -51,7 +51,7 @@ public class UserController extends BaseController {
             User loginUser = userService.findByEmail(user.getUserName());
             if (loginUser == null) {
                 return new ResponseData(ExceptionMsg.LoginNameNotExists);
-            } else if (!loginUser.getPwd().equals(getPwd(user.getPwd()))) {
+            } else if (!loginUser.getPassword().equals(getPwd(user.getPassword()))) {
                 return new ResponseData(ExceptionMsg.LoginNameOrPassWordError);
             }
             Cookie cookie = new Cookie(Const.LOGIN_SESSION_KEY, cookieSign("" + loginUser.getId()));

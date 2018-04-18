@@ -12,7 +12,7 @@ public class Role {
     @Column(updatable = false, insertable = false)
     private int id;
     private String name;
-
+    
     private static final Role SYS_ADMIN = new Role(0, "SysAdmin");
     private static final Role SYS_USER = new Role(1, "SysUser");
 

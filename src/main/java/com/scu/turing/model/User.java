@@ -13,8 +13,8 @@ public class User {
     private Role role;
     @Column(nullable = false)
     private String email;
-    @Column(nullable = false, length = 8)
-    private String pwd;
+    @Column(nullable = false)
+    private String password;
     private String userName;
 
     public String getUserName() {
@@ -49,12 +49,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setPassword(String pwd) {
+        this.password = pwd;
     }
 
     @Override
