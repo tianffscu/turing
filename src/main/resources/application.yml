@@ -1,6 +1,6 @@
 logging:
-  path: ~/log
-  file: weblog
+#  path: ~/log
+#  file: weblog
   level: info
 server:
   port: 8080
