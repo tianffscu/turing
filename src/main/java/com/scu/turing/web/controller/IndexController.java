@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/")
@@ -25,7 +27,7 @@ public class IndexController extends BaseController {
 //        model.addAttribute("favorites",favorites);
 //        model.addAttribute("size",size);
 //        model.addAttribute("followList",followList);
-        model.addAttribute("user",getUser());
+        model.addAttribute("user", getUser());
 //        model.addAttribute("newAtMeCount",noticeRepository.countByUserIdAndTypeAndReaded(getUserId(), "at", "unread"));
 //        model.addAttribute("newCommentMeCount",noticeRepository.countByUserIdAndTypeAndReaded(getUserId(), "comment", "unread"));
 //        model.addAttribute("newPraiseMeCount",noticeRepository.countPraiseByUserIdAndReaded(getUserId(), "unread"));
@@ -44,18 +46,24 @@ public class IndexController extends BaseController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletResponse response, Model model) {
+    public String logout(HttpServletResponse response,
+                         HttpServletRequest request) {
         getSession().removeAttribute(Const.LOGIN_SESSION_KEY);
         getSession().removeAttribute(Const.LAST_REFERER);
         Cookie cookie = new Cookie(Const.LOGIN_SESSION_KEY, "");
         cookie.setMaxAge(0);
         cookie.setPath("/");
         response.addCookie(cookie);
+        try {
+            response.sendRedirect("/index");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "/index";
     }
 
     @GetMapping("/authorize")
-    public String authorize(){
+    public String authorize() {
         return "authorize";
     }
 
