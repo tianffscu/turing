@@ -51,7 +51,7 @@ public class IndexController extends BaseController {
         cookie.setMaxAge(0);
         cookie.setPath("/");
         response.addCookie(cookie);
-        return "index";
+        return "/index";
     }
 
     @GetMapping("/authorize")

@@ -7180,3 +7180,52 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template "task/
 2018-04-23 22:32:42.183  INFO 14936 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 17 ms
 2018-04-23 22:32:42.357  WARN 14936 --- [http-nio-8080-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [163] milliseconds.
 2018-04-23 22:32:53.170  INFO 14936 --- [http-nio-8080-exec-6] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2018-04-23 22:39:34.000  INFO 12536 --- [main] com.scu.turing.TuringApplication         : Starting TuringApplication on DESKTOP-Q06A676 with PID 12536 (C:\Users\tianff\Desktop\turing\target\classes started by tianff in C:\Users\tianff\Desktop\turing)
+2018-04-23 22:39:34.003  INFO 12536 --- [main] com.scu.turing.TuringApplication         : No active profile set, falling back to default profiles: default
+2018-04-23 22:39:34.223  INFO 12536 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3a0d172f: startup date [Mon Apr 23 22:39:34 CST 2018]; root of context hierarchy
+2018-04-23 22:39:35.033  INFO 12536 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$75c06867] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-23 22:39:35.379  INFO 12536 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8080 (http)
+2018-04-23 22:39:35.401  INFO 12536 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-04-23 22:39:35.401  INFO 12536 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.29
+2018-04-23 22:39:35.495  INFO 12536 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-04-23 22:39:35.496  INFO 12536 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1277 ms
+2018-04-23 22:39:35.639  INFO 12536 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-04-23 22:39:35.643  INFO 12536 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-04-23 22:39:35.643  INFO 12536 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-04-23 22:39:35.644  INFO 12536 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-04-23 22:39:35.644  INFO 12536 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-04-23 22:39:35.644  INFO 12536 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'userFilter' to: [/*]
+2018-04-23 22:39:35.644  INFO 12536 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'resourceUrlEncodingFilter' to: [/*]
+2018-04-23 22:39:36.079  INFO 12536 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-04-23 22:39:36.088  INFO 12536 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-04-23 22:39:36.143  INFO 12536 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.0.12.Final}
+2018-04-23 22:39:36.144  INFO 12536 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-04-23 22:39:36.145  INFO 12536 --- [main] org.hibernate.cfg.Environment            : HHH000021: Bytecode provider name : javassist
+2018-04-23 22:39:36.182  INFO 12536 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-04-23 22:39:36.345  INFO 12536 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2018-04-23 22:39:36.690  INFO 12536 --- [main] org.hibernate.tool.hbm2ddl.SchemaUpdate  : HHH000228: Running hbm2ddl schema update
+2018-04-23 22:39:36.791  INFO 12536 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-04-23 22:39:37.349  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@3a0d172f: startup date [Mon Apr 23 22:39:34 CST 2018]; root of context hierarchy
+2018-04-23 22:39:37.403  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/index],methods=[GET]}" onto public java.lang.String com.scu.turing.web.controller.IndexController.index(org.springframework.ui.Model)
+2018-04-23 22:39:37.404  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/],methods=[GET]}" onto public java.lang.String com.scu.turing.web.controller.IndexController.home(org.springframework.ui.Model)
+2018-04-23 22:39:37.404  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/logout],methods=[GET]}" onto public java.lang.String com.scu.turing.web.controller.IndexController.logout(javax.servlet.http.HttpServletResponse,org.springframework.ui.Model)
+2018-04-23 22:39:37.404  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/login],methods=[GET]}" onto public java.lang.String com.scu.turing.web.controller.IndexController.login()
+2018-04-23 22:39:37.404  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/authorize],methods=[GET]}" onto public java.lang.String com.scu.turing.web.controller.IndexController.authorize()
+2018-04-23 22:39:37.404  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/register],methods=[GET]}" onto public java.lang.String com.scu.turing.web.controller.IndexController.regist()
+2018-04-23 22:39:37.405  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/task/{taskId}],methods=[GET]}" onto public java.lang.String com.scu.turing.web.controller.IndexController.getTaskDetail(java.lang.Long)
+2018-04-23 22:39:37.407  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/task/all],methods=[POST]}" onto public com.scu.turing.model.result.Response com.scu.turing.web.controller.TaskController.recentAll(int,int)
+2018-04-23 22:39:37.407  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/task/add],methods=[POST]}" onto public com.scu.turing.model.result.Response com.scu.turing.web.controller.TaskController.addTask(java.lang.String,java.lang.String,java.lang.String)
+2018-04-23 22:39:37.407  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/audio/add],methods=[POST]}" onto public com.scu.turing.model.result.Response com.scu.turing.web.controller.TaskController.addAudio(java.lang.Long,org.springframework.web.multipart.MultipartFile,javax.servlet.http.HttpServletRequest)
+2018-04-23 22:39:37.408  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/task/progress],methods=[POST]}" onto public com.scu.turing.model.result.Response com.scu.turing.web.controller.TaskController.getTaskProgress(java.lang.Long)
+2018-04-23 22:39:37.408  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/comment/add]}" onto public com.scu.turing.model.result.Response com.scu.turing.web.controller.TaskController.addComment(java.lang.String,java.lang.Long,java.lang.String)
+2018-04-23 22:39:37.408  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/comment/recent]}" onto public com.scu.turing.model.result.Response com.scu.turing.web.controller.TaskController.getRecentComment(java.lang.Long)
+2018-04-23 22:39:37.409  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/user/register],methods=[POST]}" onto public com.scu.turing.model.result.Response com.scu.turing.web.controller.UserController.register(com.scu.turing.model.User)
+2018-04-23 22:39:37.410  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/user/login],methods=[POST]}" onto public com.scu.turing.model.result.Response com.scu.turing.web.controller.UserController.login(com.scu.turing.model.User,javax.servlet.http.HttpServletResponse)
+2018-04-23 22:39:37.410  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/webjarslocator/{webjar}/**]}" onto public org.springframework.http.ResponseEntity com.scu.turing.web.controller.WebJarController.locateWebjarAsset(java.lang.String,javax.servlet.http.HttpServletRequest)
+2018-04-23 22:39:37.411  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-04-23 22:39:37.412  INFO 12536 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-04-23 22:39:37.494  INFO 12536 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-23 22:39:37.494  INFO 12536 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-23 22:39:37.525  INFO 12536 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
