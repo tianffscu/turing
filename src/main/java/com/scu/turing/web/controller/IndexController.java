@@ -5,6 +5,7 @@ import com.scu.turing.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
@@ -24,7 +25,7 @@ public class IndexController extends BaseController {
 //        model.addAttribute("favorites",favorites);
 //        model.addAttribute("size",size);
 //        model.addAttribute("followList",followList);
-//        model.addAttribute("user",getUser());
+        model.addAttribute("user",getUser());
 //        model.addAttribute("newAtMeCount",noticeRepository.countByUserIdAndTypeAndReaded(getUserId(), "at", "unread"));
 //        model.addAttribute("newCommentMeCount",noticeRepository.countByUserIdAndTypeAndReaded(getUserId(), "comment", "unread"));
 //        model.addAttribute("newPraiseMeCount",noticeRepository.countPraiseByUserIdAndReaded(getUserId(), "unread"));
@@ -53,14 +54,26 @@ public class IndexController extends BaseController {
         return "index";
     }
 
+    @GetMapping("/authorize")
+    public String authorize(){
+        return "authorize";
+    }
+
     @GetMapping("/index")
-    public String index(Model model){
-        model.addAttribute("collector","");
+    public String index(Model model) {
+        model.addAttribute("collector", "");
         User user = getUser();
-        if(null != user){
-            model.addAttribute("user",user);
+        if (null != user) {
+            model.addAttribute("user", user);
         }
         return "index";
     }
 
+    @GetMapping("/task/{taskId}")
+    public String getTaskDetail(@PathVariable("taskId") Long taskId) {
+
+        // FIXME: 2018/4/23
+
+        return null;
+    }
 }

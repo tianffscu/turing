@@ -62,7 +62,7 @@
                                 </a>
                                 <input th:id="'praiseC' + ${collect.id}" type="hidden" name="praiseC" th:value="${collect.praiseCount}" />
                                 <input th:id="'commentC' + ${collect.id}" type="hidden" name="commentC" th:value="${collect.commentCount}" />
-                                | <a  class="sharing-action-button btn-comment" href="javascript:void(0);" th:onclick="'switchComment(' + ${collect.id} + ');'" > <span class="fa fa-comment-o"></span>
+                                | <a  class="sharing-action-button btn-content" href="javascript:void(0);" th:onclick="'switchComment(' + ${collect.id} + ');'" > <span class="fa fa-content-o"></span>
                                 <show th:id="'commentS' + ${collect.id}" th:text="|评论(${collect.commentCount})|"> 评论(0)</show>
                                 </a>
                                 <if th:if="${myself== 'NO'}" > | </if>
@@ -76,8 +76,8 @@
                                         <input th:id="'praiseC' + ${collect.id}" type="hidden" name="praiseC" th:value="${collect.praiseCount}" />
                                         <input th:id="'commentC' + ${collect.id}" type="hidden" name="commentC" th:value="${collect.commentCount}" />
                                         |
-                                        <a  class="sharing-action-button btn-comment" href="javascript:void(0);" th:onclick="'switchComment(' + ${collect.id} + ');'">
-                                            <span class="fa fa-comment-o"></span>
+                                        <a  class="sharing-action-button btn-content" href="javascript:void(0);" th:onclick="'switchComment(' + ${collect.id} + ');'">
+                                            <span class="fa fa-content-o"></span>
                                             <show th:id="'commentS' + ${collect.id}" th:text="|评论(${collect.commentCount})|">	 评论(0)</show>
                                         </a>
                                     </small>
@@ -85,13 +85,13 @@
                         </div>
                         <div class="collapse" th:id="'collapse' + ${collect.id}">
                             <comments th:id="'commentList' + ${collect.id}"></comments>
-                            <div class="media p0" th:id="'comment' + ${collect.id}">
+                            <div class="media p0" th:id="'content' + ${collect.id}">
                                 <div class="media-body">
                                     <form>
                                         <div th:if="${loginUser!=null}" class="input-group">
                                             <input th:id="'commentContent' + ${collect.id}"   type="text" placeholder="输入评论..." class="form-control"/>
                                             <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button" th:onclick="'comment(' + ${collect.id} + ');'" >发送</button>
+                                            <button class="btn btn-default" type="button" th:onclick="'content(' + ${collect.id} + ');'" >发送</button>
                                             </span> </div>
                                     </form>
                                 </div>

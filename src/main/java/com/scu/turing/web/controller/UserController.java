@@ -34,7 +34,9 @@ public class UserController extends BaseController {
 //            user.setCreateTime(DateUtils.getCurrentTime());
 //            user.setLastModifyTime(DateUtils.getCurrentTime());
 //            user.setProfilePicture("img/favicon.png");
-            userService.saveUser(user);
+            if (userService.saveUser(user) == null) {
+                return result(ExceptionMsg.UserNameUsed);
+            }
             getSession().setAttribute(Const.LOGIN_SESSION_KEY, user);
         } catch (Exception e) {
             // TODO: handle exception

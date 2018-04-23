@@ -92,7 +92,7 @@
 		 var _form = $(this).parent().parent().parent();
 		 var ok = _form.parsley().isValid({force: true});
 		 if(ok){
-			var url = '/comment/add';
+			var url = '/content/add';
 			$.ajax({
 				url : url,
 				data : _form.serialize(),

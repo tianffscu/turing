@@ -24,6 +24,10 @@ public class BaseController {
         return new Response(msg);
     }
 
+    protected Response failed(){
+        return new Response(ExceptionMsg.FAILED);
+    }
+
     protected Response result() {
         return new Response();
     }

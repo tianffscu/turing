@@ -29,6 +29,13 @@ public class FileUtil {
             return null;
         }
     }
+
+    public static String getLegalFileName(String originName){
+
+
+
+	    return null;
+    }
 	
 	/**
 	 * 上传文件
@@ -37,7 +44,7 @@ public class FileUtil {
 	 * @param fileName
 	 * @throws Exception
 	 */
-	public static void uploadFile(byte[] fileBytes, String filePath, String fileName) throws Exception {	
+	public static void uploadFile(byte[] fileBytes, String filePath, String fileName) throws Exception {
 		File targetFile = new File(filePath);  
         if(!targetFile.exists()){    
             targetFile.mkdirs();    

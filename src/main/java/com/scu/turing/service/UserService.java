@@ -22,6 +22,10 @@ public class UserService {
         return repository.findByEmail(email);
     }
 
+    public User getByUserName(String username){
+        return repository.findByUserName(username);
+    }
+
     //用户信息更新，通常用来进行密码修改
     public User update(User user) {
         return repository.save(user);
