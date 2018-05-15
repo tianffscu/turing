@@ -86,7 +86,7 @@ function goUrl(url,params) {
 	fixUrl(url,params);
 	if(xmlhttp) {
 		//var params = "";
-		xmlhttp.open("POST",url,true);
+		xmlhttp.open("GET",url,true);
 		xmlhttp.onreadystatechange = handleServerResponse;
 		xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
 		xmlhttp.send(params);

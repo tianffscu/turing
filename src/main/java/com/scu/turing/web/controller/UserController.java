@@ -40,7 +40,7 @@ public class UserController extends BaseController {
             getSession().setAttribute(Const.LOGIN_SESSION_KEY, user);
         } catch (Exception e) {
             // TODO: handle exception
-            logger.error("create user failed, ", e);
+            logger.error("create user simpleFailed, ", e);
             return result(ExceptionMsg.FAILED);
         }
         return result();
@@ -68,7 +68,7 @@ public class UserController extends BaseController {
             return new ResponseData(ExceptionMsg.SUCCESS, preUrl);
         } catch (Exception e) {
             // TODO: handle exception
-            logger.error("login failed, ", e);
+            logger.error("login simpleFailed, ", e);
             return new ResponseData(ExceptionMsg.FAILED);
         }
     }

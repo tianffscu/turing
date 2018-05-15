@@ -8,10 +8,10 @@ var gconfig;
 var page=1;
 var standardStr = "standard";
 $(function() {
-	loadFavorites();
-	loadConfig();
-	loadFollows();
-	myrefresh();
+	// loadFavorites();
+	// loadConfig();
+	// loadFollows();
+	// myrefresh();
 	$("#passwordError").hide();
 	$("#nicknameError").hide();
 	$("#noticeNum").hide();

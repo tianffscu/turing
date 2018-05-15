@@ -52,7 +52,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     }
 
     private boolean needLogin(String uri) {
-        String[] excludes = {"login", "register"};
+        String[] excludes = {"login", "register","webjarslocator"};
 
         return Arrays.stream(excludes)
                 .noneMatch(uri::contains);

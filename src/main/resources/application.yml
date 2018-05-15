@@ -1,14 +1,14 @@
-logging:
+#logging:
 #  path: ~/log
 #  file: weblog
-  level: info
+#  level: info
 server:
   port: 8080
   session:
     timeout: 3600
 spring:
   thymeleaf:
-    cache: true
+    cache: false
 #    mode: LEGACYHTML5
     encoding: utf-8
     content-type: text/html
@@ -29,5 +29,5 @@ base:
   path: http://127.0.0.1:8080/
   task:
       finishCount: 9
-debug: true
+#debug: true
 

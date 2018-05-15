@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -14,25 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/")
+//@RequestMapping("/")
 public class IndexController extends BaseController {
 
     @GetMapping("/")
     public String home(Model model) {
-//        long size= collectRepository.countByUserIdAndIsDelete(getUserId(),IsDelete.NO);
-//        Config config = configRepository.findByUserId(getUserId());
-//        Favorites favorites = favoritesRepository.findOne(Long.parseLong(config.getDefaultFavorties()));
-//        List<String> followList = followRepository.findByUserId(getUserId());
-//        entity.addAttribute("config",config);
-//        entity.addAttribute("favorites",favorites);
-//        entity.addAttribute("size",size);
-//        entity.addAttribute("followList",followList);
         model.addAttribute("user", getUser());
         logger.info("user: " + getUser());
-//        entity.addAttribute("newAtMeCount",noticeRepository.countByUserIdAndTypeAndReaded(getUserId(), "at", "unread"));
-//        entity.addAttribute("newCommentMeCount",noticeRepository.countByUserIdAndTypeAndReaded(getUserId(), "comment", "unread"));
-//        entity.addAttribute("newPraiseMeCount",noticeRepository.countPraiseByUserIdAndReaded(getUserId(), "unread"));
-//        logger.info("collect size="+size+" userID="+getUserId());
         return "home";
     }
 
@@ -43,7 +30,6 @@ public class IndexController extends BaseController {
 
     @GetMapping("/me")
     public String me(Model model) {
-
         model.addAttribute("user", getUser());
         return "user";
     }
@@ -64,9 +50,9 @@ public class IndexController extends BaseController {
         try {
             response.sendRedirect("/index");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
-        return "/index";
+        return null;
     }
 
     @GetMapping("/authorize")
@@ -82,6 +68,18 @@ public class IndexController extends BaseController {
             model.addAttribute("user", user);
         }
         return "index";
+    }
+
+    @GetMapping("/task/add")
+    public String pageAddTask(Model model) {
+        model.addAttribute("user", getUser());
+        return "addTask";
+    }
+
+    @GetMapping("/task/center")
+    public String getAllTask(Model model) {
+        model.addAttribute("user", getUser());
+        return "taskCenter";
     }
 
     @GetMapping("/task/{taskId}")

@@ -1,11 +1,13 @@
 package com.scu.turing.web.controller;
 
 import com.scu.turing.entity.Comment;
+import com.scu.turing.entity.Role;
 import com.scu.turing.entity.Task;
 import com.scu.turing.entity.User;
 import com.scu.turing.entity.result.ExceptionMsg;
 import com.scu.turing.entity.result.Response;
 import com.scu.turing.entity.result.ResponseData;
+import com.scu.turing.entity.result.ServerException;
 import com.scu.turing.service.CommentService;
 import com.scu.turing.service.TaskService;
 import com.scu.turing.service.UserService;
@@ -14,10 +16,7 @@ import com.scu.turing.utils.FileUtil;
 import com.scu.turing.utils.ParamUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Slice;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,7 +52,9 @@ public class TaskController extends BaseController {
                             @RequestParam String ownerName) {
         try {
             //todo: check Params
-            //????????????????//
+            if (!getUser().getRole().equals(Role.getAdmin())) {
+                throw new ServerException(ExceptionMsg.NO_PERMISSION);
+            }
 
             User owner = userService.getByUserName(ownerName);
             Objects.requireNonNull(owner, "User not exists!");
@@ -66,7 +67,10 @@ public class TaskController extends BaseController {
             return result();
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            return failed();
+            if (e instanceof ServerException) {
+                return failed(((ServerException) e).getExpMsg());
+            }
+            return simpleFailed();
         }
     }
 
@@ -79,7 +83,7 @@ public class TaskController extends BaseController {
             return new ResponseData(ExceptionMsg.SUCCESS, progress);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            return failed();
+            return simpleFailed();
         }
     }
 
@@ -106,7 +110,7 @@ public class TaskController extends BaseController {
             return result();
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            return failed();
+            return simpleFailed();
         }
     }
 
@@ -131,7 +135,7 @@ public class TaskController extends BaseController {
             return result();
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            return failed();
+            return simpleFailed();
         }
     }
 
@@ -142,7 +146,7 @@ public class TaskController extends BaseController {
             return new ResponseData(ExceptionMsg.SUCCESS, comments);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            return failed();
+            return simpleFailed();
         }
     }
 
