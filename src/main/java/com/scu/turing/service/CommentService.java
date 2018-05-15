@@ -1,8 +1,7 @@
 package com.scu.turing.service;
 
-import com.scu.turing.model.Comment;
+import com.scu.turing.entity.Comment;
 import com.scu.turing.repository.CommentRepository;
-import com.scu.turing.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;

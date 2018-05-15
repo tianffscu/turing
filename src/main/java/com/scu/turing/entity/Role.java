@@ -1,4 +1,4 @@
-package com.scu.turing.model;
+package com.scu.turing.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

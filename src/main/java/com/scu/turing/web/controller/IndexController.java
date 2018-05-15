@@ -1,7 +1,7 @@
 package com.scu.turing.web.controller;
 
 import com.scu.turing.comm.Const;
-import com.scu.turing.model.User;
+import com.scu.turing.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,14 +23,15 @@ public class IndexController extends BaseController {
 //        Config config = configRepository.findByUserId(getUserId());
 //        Favorites favorites = favoritesRepository.findOne(Long.parseLong(config.getDefaultFavorties()));
 //        List<String> followList = followRepository.findByUserId(getUserId());
-//        model.addAttribute("config",config);
-//        model.addAttribute("favorites",favorites);
-//        model.addAttribute("size",size);
-//        model.addAttribute("followList",followList);
+//        entity.addAttribute("config",config);
+//        entity.addAttribute("favorites",favorites);
+//        entity.addAttribute("size",size);
+//        entity.addAttribute("followList",followList);
         model.addAttribute("user", getUser());
-//        model.addAttribute("newAtMeCount",noticeRepository.countByUserIdAndTypeAndReaded(getUserId(), "at", "unread"));
-//        model.addAttribute("newCommentMeCount",noticeRepository.countByUserIdAndTypeAndReaded(getUserId(), "comment", "unread"));
-//        model.addAttribute("newPraiseMeCount",noticeRepository.countPraiseByUserIdAndReaded(getUserId(), "unread"));
+        logger.info("user: " + getUser());
+//        entity.addAttribute("newAtMeCount",noticeRepository.countByUserIdAndTypeAndReaded(getUserId(), "at", "unread"));
+//        entity.addAttribute("newCommentMeCount",noticeRepository.countByUserIdAndTypeAndReaded(getUserId(), "comment", "unread"));
+//        entity.addAttribute("newPraiseMeCount",noticeRepository.countPraiseByUserIdAndReaded(getUserId(), "unread"));
 //        logger.info("collect size="+size+" userID="+getUserId());
         return "home";
     }
@@ -38,6 +39,13 @@ public class IndexController extends BaseController {
     @GetMapping("/register")
     public String regist() {
         return "register";
+    }
+
+    @GetMapping("/me")
+    public String me(Model model) {
+
+        model.addAttribute("user", getUser());
+        return "user";
     }
 
     @GetMapping("/login")
@@ -48,8 +56,7 @@ public class IndexController extends BaseController {
     @GetMapping("/logout")
     public String logout(HttpServletResponse response,
                          HttpServletRequest request) {
-        getSession().removeAttribute(Const.LOGIN_SESSION_KEY);
-        getSession().removeAttribute(Const.LAST_REFERER);
+        getSession().invalidate();
         Cookie cookie = new Cookie(Const.LOGIN_SESSION_KEY, "");
         cookie.setMaxAge(0);
         cookie.setPath("/");

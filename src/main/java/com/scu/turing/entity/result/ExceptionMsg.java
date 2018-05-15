@@ -1,5 +1,5 @@
 
-package com.scu.turing.model.result;
+package com.scu.turing.entity.result;
 
 public enum ExceptionMsg {
 	SUCCESS("000000", "操作成功"),

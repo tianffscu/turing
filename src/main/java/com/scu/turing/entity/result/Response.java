@@ -1,4 +1,4 @@
-package com.scu.turing.model.result;
+package com.scu.turing.entity.result;
 
 public class Response {
     /**

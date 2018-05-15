@@ -1,17 +1,21 @@
 package com.scu.turing.web.controller;
 
 import com.scu.turing.comm.Const;
-import com.scu.turing.model.User;
-import com.scu.turing.model.result.ExceptionMsg;
-import com.scu.turing.model.result.Response;
+import com.scu.turing.entity.User;
+import com.scu.turing.entity.result.ExceptionMsg;
+import com.scu.turing.entity.result.Response;
+import com.scu.turing.repository.UserRepository;
 import com.scu.turing.utils.Des3EncryptionUtil;
 import com.scu.turing.utils.MD5Util;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 

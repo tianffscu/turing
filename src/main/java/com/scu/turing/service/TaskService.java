@@ -1,7 +1,6 @@
 package com.scu.turing.service;
 
-import com.scu.turing.model.Comment;
-import com.scu.turing.model.Task;
+import com.scu.turing.entity.Task;
 import com.scu.turing.repository.CommentRepository;
 import com.scu.turing.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;

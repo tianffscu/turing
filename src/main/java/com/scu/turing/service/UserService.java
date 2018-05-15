@@ -1,7 +1,7 @@
 package com.scu.turing.service;
 
-import com.scu.turing.model.Role;
-import com.scu.turing.model.User;
+import com.scu.turing.entity.Role;
+import com.scu.turing.entity.User;
 import com.scu.turing.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

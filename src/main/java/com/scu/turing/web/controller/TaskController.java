@@ -1,11 +1,11 @@
 package com.scu.turing.web.controller;
 
-import com.scu.turing.model.Comment;
-import com.scu.turing.model.Task;
-import com.scu.turing.model.User;
-import com.scu.turing.model.result.ExceptionMsg;
-import com.scu.turing.model.result.Response;
-import com.scu.turing.model.result.ResponseData;
+import com.scu.turing.entity.Comment;
+import com.scu.turing.entity.Task;
+import com.scu.turing.entity.User;
+import com.scu.turing.entity.result.ExceptionMsg;
+import com.scu.turing.entity.result.Response;
+import com.scu.turing.entity.result.ResponseData;
 import com.scu.turing.service.CommentService;
 import com.scu.turing.service.TaskService;
 import com.scu.turing.service.UserService;

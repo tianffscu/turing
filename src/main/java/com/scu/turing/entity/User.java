@@ -1,4 +1,4 @@
-package com.scu.turing.model;
+package com.scu.turing.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -17,6 +17,12 @@ public class User {
     private String password;
     @Column(unique = true)
     private String userName;
+
+    private String backgroundPicture;
+
+    private String profilePicture;
+
+    private String introduction;
 
     public String getUserName() {
         return userName;
@@ -56,6 +62,30 @@ public class User {
 
     public void setPassword(String pwd) {
         this.password = pwd;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public String getBackgroundPicture() {
+        return backgroundPicture;
+    }
+
+    public void setBackgroundPicture(String backgroundPicture) {
+        this.backgroundPicture = backgroundPicture;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
     @Override

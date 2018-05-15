@@ -8,8 +8,8 @@ server:
     timeout: 3600
 spring:
   thymeleaf:
-    cache: false
-    mode: LEGACYHTML5
+    cache: true
+#    mode: LEGACYHTML5
     encoding: utf-8
     content-type: text/html
 
@@ -24,7 +24,10 @@ spring:
         ddl-auto: update
       show-sql: true
 base:
+  auth:
+      mockenable: true
   path: http://127.0.0.1:8080/
   task:
-    finishCount: 9
+      finishCount: 9
+debug: true
 
