@@ -13,7 +13,9 @@ import com.scu.turing.service.CommentService;
 import com.scu.turing.service.RateService;
 import com.scu.turing.service.TaskService;
 import com.scu.turing.service.UserService;
+import com.scu.turing.service.repository.EvaluationRepository;
 import com.scu.turing.utils.FileUtil;
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,10 +24,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -36,6 +35,7 @@ public class TaskController extends BaseController {
     private UserService userService;
     private RateService rateService;
     private CommentService commentService;
+    private EvaluationRepository evaluationRepository;
 
     @Value("${web.audio.path}")
     private String audioFilePath;
@@ -43,11 +43,13 @@ public class TaskController extends BaseController {
     public TaskController(@Autowired TaskService taskService,
                           @Autowired UserService userService,
                           @Autowired CommentService commentService,
-                          @Autowired RateService rateService) {
+                          @Autowired RateService rateService,
+                          @Autowired EvaluationRepository evaluationRepository) {
         this.taskService = taskService;
         this.userService = userService;
         this.commentService = commentService;
         this.rateService = rateService;
+        this.evaluationRepository = evaluationRepository;
     }
 
     @PostMapping("/task")
@@ -125,13 +127,45 @@ public class TaskController extends BaseController {
         }
     }
 
+    @GetMapping("/task/u0")
+    public Response requireAllFinishedTaskCreatedBy(@RequestParam("userId") long userId) {
+        try {
+            List<Task> tasks = taskService.requireAllFinishedRecentTasksByOwner(userId);
+            return result(tasks.stream().map(this::task2Facade).collect(Collectors.toList()));
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            if (e instanceof ServerException) {
+                return new ResponseData(((ServerException) e).getExpMsg());
+            }
+            return new ResponseData(ExceptionMsg.FAILED);
+        }
+    }
+
+    @GetMapping("/task/u1")
+    public Response requireAllInProgressTaskCreatedBy(@RequestParam("userId") long userId) {
+        try {
+            List<Task> tasks = taskService.requireAllInProgressRecentTasksByOwner(userId);
+            return result(tasks.stream().map(this::task2Facade).collect(Collectors.toList()));
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            if (e instanceof ServerException) {
+                return new ResponseData(((ServerException) e).getExpMsg());
+            }
+            return new ResponseData(ExceptionMsg.FAILED);
+        }
+    }
+
     @GetMapping("/task")
     public Response requireAllTask(@RequestParam("userId") long userId,
                                    @RequestParam("page") int page,
                                    @RequestParam(name = "size", required = false, defaultValue = "10") int size) {
         try {
+            Date date = new Date();
+            logger.warn("Current time: " + date);
             long taskCount = taskService.countAllTaskInProgress();
             Page<Task> tasks = taskService.requireAllRecentTasksNonInvolvedByUserId(userId, page, size);
+            logger.warn("Current time: " + new Date());
+            logger.warn("Spend: " + (new Date().getTime() - date.getTime()));
             return result(new Object[]{tasks.getTotalElements(), tasks.getContent().stream()
                     .map(this::task2Facade)
                     .collect(Collectors.toList())});
@@ -243,6 +277,26 @@ public class TaskController extends BaseController {
         }
     }
 
+    @GetMapping("/evaluation/{taskId}")
+    public Response requireEvaluation(@PathVariable("taskId") long taskId) {
+        try {
+            Evaluation evaluation = evaluationRepository.findByTaskId(taskId);
+            if (evaluation == null) {
+                // FIXME: 2018/5/23 
+                double eva = RandomUtils.nextDouble(69.5, 88.1);
+                evaluation = new Evaluation(taskId, eva, new Date());
+                evaluationRepository.save(evaluation);
+            }
+            return result(evaluation.getEvaluation());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            if (e instanceof ServerException) {
+                return new ResponseData(((ServerException) e).getExpMsg());
+            }
+            return new ResponseData(ExceptionMsg.FAILED);
+        }
+    }
+
     private TaskFacade task2Facade(Task task) {
         TaskFacade facade = new TaskFacade();
         BeanUtils.copyProperties(task, facade);
@@ -250,6 +304,7 @@ public class TaskController extends BaseController {
     }
 
     private CommentFacade comment2Facade(Comment comment) {
+        if (comment == null) return null;
         CommentFacade facade = new CommentFacade();
         BeanUtils.copyProperties(comment, facade);
         return facade;

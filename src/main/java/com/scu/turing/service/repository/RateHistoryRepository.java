@@ -9,4 +9,6 @@ public interface RateHistoryRepository extends JpaRepository<RateHistory, Long> 
 
     List<RateHistory> findByTaskId(long taskId);
 
+    List<RateHistory> findByUserId(long userId);
+
 }

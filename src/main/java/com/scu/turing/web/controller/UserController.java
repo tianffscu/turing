@@ -1,20 +1,19 @@
 package com.scu.turing.web.controller;
 
+import com.scu.turing.entity.Role;
 import com.scu.turing.entity.User;
 import com.scu.turing.model.ExceptionMsg;
 import com.scu.turing.model.Response;
 import com.scu.turing.model.ResponseData;
 import com.scu.turing.model.ServerException;
+import com.scu.turing.model.facade.UserFacade;
 import com.scu.turing.service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/user")
 public class UserController extends BaseController {
 
     private UserService userService;
@@ -38,7 +37,7 @@ public class UserController extends BaseController {
             userService.saveUser(user);
             return success();
         } catch (Exception e) {
-            logger.error("login simpleFailed, ", e);
+            logger.error(e.getMessage(), e);
             if (e instanceof ServerException) {
                 return new ResponseData(((ServerException) e).getExpMsg());
             }
@@ -56,13 +55,89 @@ public class UserController extends BaseController {
             } else if (!loginUser.getPassword().equals(getPwd(password))) {
                 throw new ServerException(ExceptionMsg.LoginNameOrPassWordError);
             }
-            return success();
+            return result(user2Facade(loginUser));
         } catch (Exception e) {
-            logger.error("login simpleFailed, ", e);
+            logger.error(e.getMessage(), e);
             if (e instanceof ServerException) {
                 return new ResponseData(((ServerException) e).getExpMsg());
             }
             return new ResponseData(ExceptionMsg.FAILED);
         }
     }
+
+    @PostMapping("/password/{userId}")
+    public Response updatePassword(@PathVariable("userId") long userId,
+                                   @RequestParam("oldpass") String oldPassword,
+                                   @RequestParam("newpass") String password) {
+        try {
+            User user = userService.getUserById(userId);
+            if (!user.getPassword().equals(oldPassword)) {
+                throw new ServerException(ExceptionMsg.LoginNameOrPassWordError);
+            }
+            user.setPassword(password);
+            userService.saveUser(user);
+            return success();
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            if (e instanceof ServerException) {
+                return new ResponseData(((ServerException) e).getExpMsg());
+            }
+            return new ResponseData(ExceptionMsg.FAILED);
+        }
+    }
+
+
+    @GetMapping("/user/{id}")
+    public Response userDetail(@PathVariable("id") long userId) {
+        try {
+            User user = userService.getUserById(userId);
+            return result(user2Facade(user));
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            if (e instanceof ServerException) {
+                return new ResponseData(((ServerException) e).getExpMsg());
+            }
+            return new ResponseData(ExceptionMsg.FAILED);
+        }
+    }
+
+    @PostMapping("/user/u0/{userId}")
+    public Response updateUser(@PathVariable("userId") long userId,
+                               @RequestParam("description") String desc) {
+        try {
+            User user = userService.getUserById(userId);
+            user.setDescription(desc);
+            userService.saveUser(user);
+            return success();
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            if (e instanceof ServerException) {
+                return new ResponseData(((ServerException) e).getExpMsg());
+            }
+            return new ResponseData(ExceptionMsg.FAILED);
+        }
+    }
+
+    @PostMapping("/admin/{userId}")
+    public Response becomeAdmin(@PathVariable("userId") long userId) {
+        try {
+            User user = userService.getUserById(userId);
+            user.setRole(Role.getAdmin());
+            userService.saveUser(user);
+            return success();
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            if (e instanceof ServerException) {
+                return new ResponseData(((ServerException) e).getExpMsg());
+            }
+            return new ResponseData(ExceptionMsg.FAILED);
+        }
+    }
+
+    public UserFacade user2Facade(User user) {
+        UserFacade facade = new UserFacade();
+        BeanUtils.copyProperties(user, facade);
+        return facade;
+    }
+
 }

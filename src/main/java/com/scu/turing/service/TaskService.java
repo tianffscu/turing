@@ -3,11 +3,14 @@ package com.scu.turing.service;
 import com.google.common.collect.Lists;
 import com.scu.turing.entity.Comment;
 import com.scu.turing.entity.Task;
+import com.scu.turing.model.ExceptionMsg;
+import com.scu.turing.model.ServerException;
 import com.scu.turing.service.repository.CommentRepository;
 import com.scu.turing.service.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +31,10 @@ public class TaskService {
         return taskRepository.getOne(id);
     }
 
+    public List<Task> getTaskByIds(List<Long> ids) {
+        return taskRepository.findByIdIn(ids);
+    }
+
     public Task getTaskByTaskName(String taskName) {
         return taskRepository.findByTaskName(taskName);
     }
@@ -36,8 +43,23 @@ public class TaskService {
         return taskRepository.save(t);
     }
 
+    @Transactional
     public Comment saveComment(Comment comment) {
+        Task task = getTaskById(comment.getTaskId());
+        int currentCount = getCurrentFinishCount(comment.getTaskId());
+        if (currentCount >= task.getFinishHit()) {
+            throw new ServerException(ExceptionMsg.TASK_CLOSED);
+        }
+        if ((currentCount + 1) == task.getFinishHit()) {
+            task.setFinished(true);
+        }
+        taskRepository.save(task);
+        onTaskFinished();
         return commentRepository.save(comment);
+    }
+
+    private void onTaskFinished() {
+        // TODO: 2018/5/23 调用语音识别接口和相似度匹配检测
     }
 
     public long countAllTaskInProgress() {
@@ -77,8 +99,11 @@ public class TaskService {
                 .map(Comment::getTaskId).collect(Collectors.toList()), req);
     }
 
-    public List<Task> requireAllRecentTasksByOwner(long userId, int page, int size) {
-        Pageable req = new PageRequest(page, size);
-        return Lists.newArrayList(taskRepository.findByOwnerIdOrderByIdDesc(userId, req));
+    public List<Task> requireAllFinishedRecentTasksByOwner(long userId) {
+        return Lists.newArrayList(taskRepository.findByOwnerIdAndFinishedTrueOrderByIdDesc(userId));
+    }
+
+    public List<Task> requireAllInProgressRecentTasksByOwner(long userId) {
+        return Lists.newArrayList(taskRepository.findByOwnerIdAndFinishedFalseOrderByIdDesc(userId));
     }
 }

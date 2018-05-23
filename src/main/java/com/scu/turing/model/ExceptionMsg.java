@@ -6,6 +6,7 @@ public enum ExceptionMsg {
     FAILED("999999", "操作失败"),
     ParamError("000001", "参数错误！"),
     NO_PERMISSION("000201", "没有权限!"),
+    TASK_CLOSED("000301", "任务已完成!"),
 
     LoginNameOrPassWordError("000100", "用户名或者密码错误！"),
     EmailUsed("000101", "该邮箱已被注册"),

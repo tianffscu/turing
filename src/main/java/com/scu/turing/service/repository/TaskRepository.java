@@ -12,10 +12,12 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     Task findByTaskName(String taskName);
 
     Page<Task> findByIdIn(List<Long> ids,Pageable pageable);
+    List<Task> findByIdIn(List<Long> ids);
 
     Page<Task> findByFinishedFalseAndIdNotIn(List<Long> ids, Pageable pageable);
 
-    Slice<Task> findByOwnerIdOrderByIdDesc(long ownerId, Pageable pageable);
+    List<Task> findByOwnerIdAndFinishedTrueOrderByIdDesc(long ownerId);
+    List<Task> findByOwnerIdAndFinishedFalseOrderByIdDesc(long ownerId);
 
 //    @Query("select count(t) from Task t where ")
 //    long countAllTaskInProgress();

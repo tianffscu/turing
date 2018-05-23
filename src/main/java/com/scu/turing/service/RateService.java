@@ -16,14 +16,16 @@ public class RateService {
         this.rateHistoryRepository = rateHistoryRepository;
     }
 
+    public RateHistory save(RateHistory rateHistory) {
+        return rateHistoryRepository.save(rateHistory);
+    }
+
     public List<RateHistory> findByTaskId(long taskId) {
         return rateHistoryRepository.findByTaskId(taskId);
     }
 
     public List<RateHistory> findByUserId(long userId) {
-
-
-        return null;
+        return rateHistoryRepository.findByUserId(userId);
     }
 
     public RateHistory findByTaskIdAndUserId(long taskId, long userId) {

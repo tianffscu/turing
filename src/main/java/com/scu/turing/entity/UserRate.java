@@ -20,6 +20,20 @@ public class UserRate {
 
     private Date time;
 
+    public UserRate() {
+    }
+
+    public UserRate(long userId, double rate) {
+        this.userId = userId;
+        this.rate = rate;
+    }
+
+    public UserRate(long userId, double rate, Date time) {
+        this.userId = userId;
+        this.rate = rate;
+        this.time = time;
+    }
+
     public long getId() {
         return id;
     }
