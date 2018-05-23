@@ -1,7 +1,7 @@
 package com.scu.turing.service;
 
 import com.scu.turing.entity.Comment;
-import com.scu.turing.repository.CommentRepository;
+import com.scu.turing.service.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
@@ -18,6 +18,10 @@ public class CommentService {
     }
 
     public Slice<Comment> requireAllRecentComments(long taskId, int page, int size) {
-        return commentRepository.findByTaskId(taskId, new PageRequest(page, size));
+        return commentRepository.findByTaskIdOrderByIdDesc(taskId, new PageRequest(page, size));
+    }
+
+    public Comment requireCommentByTaskIdAndUserId(long taskId, long userId) {
+        return commentRepository.findByTaskIdAndUserId(taskId, userId);
     }
 }

@@ -1,7 +1,6 @@
 package com.scu.turing.entity;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 public class User {
@@ -17,20 +16,7 @@ public class User {
     private String password;
     @Column(unique = true)
     private String userName;
-
-    private String backgroundPicture;
-
-    private String profilePicture;
-
-    private String introduction;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    private String description;
 
     public long getId() {
         return id;
@@ -60,55 +46,23 @@ public class User {
         return password;
     }
 
-    public void setPassword(String pwd) {
-        this.password = pwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getProfilePicture() {
-        return profilePicture;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getBackgroundPicture() {
-        return backgroundPicture;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBackgroundPicture(String backgroundPicture) {
-        this.backgroundPicture = backgroundPicture;
-    }
-
-    public String getIntroduction() {
-        return introduction;
-    }
-
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id &&
-                Objects.equals(role, user.role) &&
-                Objects.equals(email, user.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, role);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", role=" + role +
-                ", name='" + email + '\'' +
-                '}';
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

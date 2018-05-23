@@ -10,30 +10,46 @@ public class Task {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
     @Column(nullable = false)
-    private Long ownerId;
-    @Column(unique = true)
+    private long ownerId;
     private String taskName;
     private String description;
+
+    private int finishHit;
+
+    private boolean finished;
 
     private String audioUri;
 
     private String autoTransTxt;
+    private String ownerDefTxt;
 
-    public Long getOwnerId() {
+    public Task() {
+    }
+
+    public Task(long ownerId, String taskName, String description,
+                int finishHit, String ownerDefTxt) {
+        this.ownerId = ownerId;
+        this.taskName = taskName;
+        this.description = description;
+        this.finishHit = finishHit;
+        this.ownerDefTxt = ownerDefTxt;
+    }
+
+    public long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(Long ownerId) {
+    public void setOwnerId(long ownerId) {
         this.ownerId = ownerId;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -43,6 +59,22 @@ public class Task {
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
+    }
+
+    public int getFinishHit() {
+        return finishHit;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
+    public void setFinishHit(int finishHit) {
+        this.finishHit = finishHit;
     }
 
     public String getDescription() {
@@ -67,6 +99,14 @@ public class Task {
 
     public void setAutoTransTxt(String autoTransTxt) {
         this.autoTransTxt = autoTransTxt;
+    }
+
+    public String getOwnerDefTxt() {
+        return ownerDefTxt;
+    }
+
+    public void setOwnerDefTxt(String ownerDefTxt) {
+        this.ownerDefTxt = ownerDefTxt;
     }
 
     @Override

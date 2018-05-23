@@ -2,8 +2,8 @@ package com.scu.turing.web.controller;
 
 import com.scu.turing.comm.Const;
 import com.scu.turing.entity.User;
-import com.scu.turing.entity.result.ExceptionMsg;
-import com.scu.turing.entity.result.Response;
+import com.scu.turing.model.ExceptionMsg;
+import com.scu.turing.model.Response;
 import com.scu.turing.utils.Des3EncryptionUtil;
 import com.scu.turing.utils.MD5Util;
 import org.apache.commons.lang3.StringUtils;
@@ -20,7 +20,7 @@ public class BaseController {
 
     protected Logger logger = Logger.getLogger(this.getClass());
 
-    protected Response simpleSuccess() {
+    protected Response success() {
         return new Response();
     }
 
@@ -28,16 +28,16 @@ public class BaseController {
         return new Response(msg);
     }
 
-    protected Response simpleFailed() {
+    protected <T> Response<T> result(T t) {
+        return new Response<>(t);
+    }
+
+    protected Response failed() {
         return new Response(ExceptionMsg.FAILED);
     }
 
     protected Response failed(ExceptionMsg msg) {
         return new Response(msg);
-    }
-
-    protected Response result() {
-        return new Response();
     }
 
     protected HttpServletRequest getRequest() {
@@ -48,36 +48,36 @@ public class BaseController {
         return getRequest().getSession();
     }
 
-    protected User getUser() {
-        return (User) getSession().getAttribute(Const.LOGIN_SESSION_KEY);
-    }
-
-    protected Long getUserId() {
-        Long id = 0L;
-        User user = getUser();
-        if (user != null) {
-            id = user.getId();
-        }
-        return id;
-    }
-
-    protected String getUserName() {
-        String userName = "default";
-        User user = getUser();
-        if (user != null) {
-            userName = user.getUserName();
-        }
-        return userName;
-    }
-
-    protected String getUserIp() {
-        String value = getRequest().getHeader("X-Real-IP");
-        if (StringUtils.isNotBlank(value) && !"unknown".equalsIgnoreCase(value)) {
-            return value;
-        } else {
-            return getRequest().getRemoteAddr();
-        }
-    }
+//    protected User getUser() {
+//        return (User) getSession().getAttribute(Const.LOGIN_SESSION_KEY);
+//    }
+//
+//    protected Long getUserId() {
+//        Long id = 0L;
+//        User user = getUser();
+//        if (user != null) {
+//            id = user.getId();
+//        }
+//        return id;
+//    }
+//
+//    protected String getUserName() {
+//        String userName = "default";
+//        User user = getUser();
+//        if (user != null) {
+//            userName = user.getUserName();
+//        }
+//        return userName;
+//    }
+//
+//    protected String getUserIp() {
+//        String value = getRequest().getHeader("X-Real-IP");
+//        if (StringUtils.isNotBlank(value) && !"unknown".equalsIgnoreCase(value)) {
+//            return value;
+//        } else {
+//            return getRequest().getRemoteAddr();
+//        }
+//    }
 
     protected String getPwd(String password) {
         try {

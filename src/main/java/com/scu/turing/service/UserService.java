@@ -2,33 +2,36 @@ package com.scu.turing.service;
 
 import com.scu.turing.entity.Role;
 import com.scu.turing.entity.User;
-import com.scu.turing.repository.UserRepository;
+import com.scu.turing.service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
 
-    public User getUserById(Integer id) {
+    public UserService(@Autowired UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-        return repository.findOne(id);
+    public User getUserById(long id) {
+        return userRepository.findOne(id);
     }
 
     public User getUserByEmail(String email) {
-
-        return repository.findByEmail(email);
+        return userRepository.findByEmail(email);
     }
 
-    public User getByUserName(String username){
-        return repository.findByUserName(username);
+    public User getByUserName(String username) {
+        return userRepository.findByUserName(username);
     }
 
     //用户信息更新，通常用来进行密码修改
-    public User update(User user) {
-        return repository.save(user);
+    public User changePassword(long userId, String password) {
+        User user = userRepository.findOne(userId);
+        user.setPassword(password);
+        return userRepository.save(user);
     }
 
     //保存注册用户
@@ -36,12 +39,6 @@ public class UserService {
         if (null == user.getRole()) {
             user.setRole(Role.getSysUser());
         }
-        return repository.save(user);
+        return userRepository.save(user);
     }
-
-    //通过email查询用户
-    public User findByEmail(String eamil) {
-        return repository.findByEmail(eamil);
-    }
-
 }

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Const {
 
+    public static final int DEFAULT_PAGE_SIZE = 10;
+
     public static String BASE_PATH;
 
     public static String LOGIN_SESSION_KEY = "sys_user";

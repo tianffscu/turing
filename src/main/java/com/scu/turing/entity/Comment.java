@@ -1,10 +1,12 @@
 package com.scu.turing.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
-@Table(indexes = {@Index(name = "comment_task_id", columnList = "task_id"),
-        @Index(name = "comment_content", columnList = "content")})
+//@Table(indexes = {@Index(name = "comment_task_id", columnList = "task_id")})
 public class Comment {
 
     @Id
@@ -14,17 +16,21 @@ public class Comment {
     @Column(length = 2550)
     private String content;
 
-    @ManyToOne(targetEntity = Task.class, fetch = FetchType.LAZY)
-    private Task task;
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    private User user;
+    //    @ManyToOne(targetEntity = Task.class, fetch = FetchType.LAZY)
+    private long taskId;
+    //    @ManyToOne(targetEntity = UserFacade.class, fetch = FetchType.LAZY)
+    private long userId;
+    @Deprecated
+    private String userName;
 
-    public User getUser() {
-        return user;
+    public Comment() {
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public Comment(String content, long taskId, long userId, String userName) {
+        this.content = content;
+        this.taskId = taskId;
+        this.userId = userId;
+        this.userName = userName;
     }
 
     public Long getId() {
@@ -43,11 +49,27 @@ public class Comment {
         this.content = content;
     }
 
-    public Task getTask() {
-        return task;
+    public long getTaskId() {
+        return taskId;
     }
 
-    public void setTask(Task task) {
-        this.task = task;
+    public void setTaskId(long taskId) {
+        this.taskId = taskId;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

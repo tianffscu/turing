@@ -1,0 +1,39 @@
+# For detail structure of this file
+# Set: https://www.elastic.co/guide/en/logstash/current/configuration-file-structure.html
+input {
+  # For detail config for log4j as input, 
+  # See: https://www.elastic.co/guide/en/logstash/current/plugins-inputs-log4j.html
+  beats {
+    port => 5000
+  }
+}
+filter {
+  grok {
+	 match => { "message" => '%{TIMESTAMP_ISO8601:eventTime} %{WORD:level} %{NOTSPACE:class} "(?<system>[^"]*)" "(?<module>[^"]*)" "(?<task>[^"]*)" (?<costTime>\d+) "(?<result>[^"]*)" "(?<information>[^"]*)" "(?<error>[^"]*)"'}
+	 remove_field  => "message" 
+	 remove_field  => "@version" 
+	 remove_field  => "tags" 
+	 remove_field  => "offset" 	 
+	 remove_field  => "prospector" 
+	 remove_field  => "beat" 	 	
+  }
+  
+  date {
+		match => [ "eventTime", "yyyy-MM-dd HH:mm:ss,SSS" ]
+		target => "eventTime"
+		timezone => "PRC"
+  }
+}
+output {
+  # For detail config for elasticsearch as output, 
+  # See: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-elasticsearch.html
+  elasticsearch {
+    action => "index"          #The operation on ES
+    hosts  => "localhost:9200"   #ElasticSearch host, can be array.
+    index  => "applog"         #The index to write data to.
+	template_name => "logstash"
+	manage_template => true  
+    template_overwrite => true  
+    template => "/logstash/config/applog.json" 
+  }
+}
